@@ -16,6 +16,7 @@
     "typecheck": "hcm src/**/*.module.css && tsc --noEmit"
   },
   "dependencies": {
+    "@prisma/client": "^4.13.0",
     "next": "^13.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -31,6 +32,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.8",
     "prettier-plugin-organize-imports": "^3.2.2",
+    "prisma": "^4.13.0",
     "stylelint": "^14.16.1",
     "stylelint-config-prettier": "^9.0.5",
     "stylelint-config-standard": "*25.0.0",
