@@ -1,9 +1,12 @@
 import { useState } from 'react';
-
-function CheckboxList({ items }) {
+interface DataObject {
+  name: string;
+  value: number;
+}
+function CheckboxList({ items }: { items: DataObject[] }) {
   const [checkedItems, setCheckedItems] = useState({});
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
     setCheckedItems((prev) => ({ ...prev, [name]: checked }));
   };
@@ -11,7 +14,7 @@ function CheckboxList({ items }) {
   return (
     <div>
       {items.map((item) => (
-        <label key={item.key}>
+        <label key={item.name}>
           {item.name}
           <input name={item.name} type="checkbox" onChange={handleChange} />
         </label>

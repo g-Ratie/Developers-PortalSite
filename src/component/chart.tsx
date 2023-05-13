@@ -1,7 +1,7 @@
 // chart.tsx
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from 'recharts';
 
-interface DataObject {
+export interface DataObject {
   name: string;
   value: number;
 }

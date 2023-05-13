@@ -1,15 +1,13 @@
 import { PrismaClient } from '@prisma/client';
 import type { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
-import Checkbox from '../component/checkbox';
-import styles from './index.module.css';
-
+import { HeaderSimple } from '../component/header';
+const Chart = dynamic(() => import('../component/chart'), { ssr: false });
 type Props = {
   count: number;
   inoutcount: number;
   usertimedata: [{ name: string; value: number }];
 };
-
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
   const prisma = new PrismaClient();
   const count = await prisma.users.count();
@@ -56,15 +54,16 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
   };
 };
 
-const Chart = dynamic(() => import('../component/chart'), { ssr: false });
-
-const Home = (props: Props) => {
+const Demopage = (props: Props) => {
   return (
-    <div className={styles.container}>
-      <Chart data={props.usertimedata} />
-      <Checkbox items={props.usertimedata} />
-    </div>
+    <HeaderSimple
+      links={[
+        { link: '/', label: 'Home' },
+        { link: '/stats', label: 'Stats' },
+        { link: '/demo', label: 'User' },
+      ]}
+    />
   );
 };
 
-export default Home;
+export default Demopage;
