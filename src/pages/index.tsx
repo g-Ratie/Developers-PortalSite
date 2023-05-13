@@ -1,8 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 import type { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
+import { TodayCard } from '../component/base/todayCard/todaycard';
 import { HeaderSimple } from '../component/header';
-const Chart = dynamic(() => import('../component/chart'), { ssr: false });
+const Chart = dynamic(() => import('../component/base/timeRankingChart/chart'), { ssr: false });
 type Props = {
   count: number;
   inoutcount: number;
@@ -56,13 +57,16 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
 
 const Demopage = (props: Props) => {
   return (
-    <HeaderSimple
-      links={[
-        { link: '/', label: 'Home' },
-        { link: '/stats', label: 'Stats' },
-        { link: '/demo', label: 'User' },
-      ]}
-    />
+    <>
+      <HeaderSimple
+        links={[
+          { link: '/', label: 'Home' },
+          { link: '/stats', label: 'Stats' },
+          { link: '/user', label: 'Users' },
+        ]}
+      />
+      <TodayCard />
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-// chart.tsx
+import { useState } from 'react';
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from 'recharts';
 
 export interface DataObject {
@@ -7,6 +7,9 @@ export interface DataObject {
 }
 
 const Chart = ({ data }: { data: DataObject[] }) => {
+  const [chartData, setChartData] = useState();
+
+  
   return (
     <BarChart width={1000} height={500} data={data}>
       <CartesianGrid strokeDasharray="3 3" />

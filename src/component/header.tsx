@@ -109,7 +109,7 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
     <>
       <Header height={60} mb={120}>
         <Container className={classes.header}>
-          <Image src="/logoblack.png" alt="logo" width={50} height={50} />
+          <Image src="/logo.png" alt="logo" width={192} height={108} />
           <Group spacing={5} className={classes.links}>
             {items}
           </Group>
