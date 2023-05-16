@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from 'recharts';
 
 export interface DataObject {
@@ -6,12 +6,24 @@ export interface DataObject {
   value: number;
 }
 
-const Chart = ({ data }: { data: DataObject[] }) => {
-  const [chartData, setChartData] = useState();
+const RankingChart = () => {
+  const [rankingData, setRankingData] = useState<DataObject[]>([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    fetch('/api/usertimeranking')
+      .then((response) => response.json())
+      .then((data) => {
+        setRankingData(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        setLoading(false);
+      });
+  }, []);
 
-  
   return (
-    <BarChart width={1000} height={500} data={data}>
+    <BarChart width={1000} height={500} data={rankingData}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" angle={-45} textAnchor="end" interval={0} height={100} />
       <YAxis />
@@ -22,4 +34,4 @@ const Chart = ({ data }: { data: DataObject[] }) => {
   );
 };
 
-export default Chart;
+export default RankingChart;
