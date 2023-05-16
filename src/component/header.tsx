@@ -83,7 +83,6 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
       href={link.link}
       className={cx(classes.link, { [classes.linkActive]: active === link.link })}
       onClick={(event) => {
-        event.preventDefault();
         setActive(link.link);
         //ここに遷移の処理を書く
       }}
@@ -97,7 +96,6 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
       href={link.link}
       className={cx(classes.burgerlink, { [classes.burgerlinkActive]: active === link.link })}
       onClick={(event) => {
-        event.preventDefault();
         setActive(link.link);
       }}
     >
@@ -119,7 +117,9 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
       </Header>
 
       <Drawer opened={opened} onClose={toggle} padding="md" position="right" size="100%">
-        {burgeritems}
+        <Container style={{ marginTop: '20%' }}>
+          {burgeritems}
+        </Container>
       </Drawer>
     </>
   );
