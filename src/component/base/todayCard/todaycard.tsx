@@ -9,16 +9,31 @@ import {
   Text,
   Title,
 } from '@mantine/core';
+import { createStyles } from '@mantine/styles';
 import { useEffect, useState } from 'react';
 interface DataObject {
   name: string;
   value: number;
 }
 
+const useStyles = createStyles((theme) => ({
+  card: {
+    [theme.fn.smallerThan('md')]: {
+      width: '90%',
+      margin: 'auto',
+    },
+    [theme.fn.largerThan('md')]: {
+      width: '60%',
+      margin: 'auto',
+    },
+  },
+}));
+
 export function TodayCard() {
   const [userinfo, setUserInfo] = useState<DataObject[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentTime, setCurrentTime] = useState('');
+  const { classes } = useStyles();
 
   useEffect(() => {
     fetch('/api/nowuser')
@@ -36,14 +51,8 @@ export function TodayCard() {
   }, []);
 
   return (
-    <Skeleton visible={loading} style={{ width: '66%', margin: 'auto' }}>
-      <Card
-        padding="md"
-        radius="md"
-        withBorder
-        shadow="sm"
-        style={{ borderLeft: '5px solid #00BFFF' }}
-      >
+    <Skeleton visible={loading} className={classes.card} style={{ marginTop: 20 }}>
+      <Card padding="md" radius="md" withBorder shadow="sm" style={{ marginLeft: 0 }}>
         <Card.Section>
           <Title order={3} align="left" mt="lg" mb="sm" style={{ marginLeft: 15 }}>
             オフィスステータス
@@ -74,7 +83,7 @@ export function TodayCard() {
                 <Accordion.Panel>
                   {userinfo.map((user, index) => (
                     <Text key={index} weight={500}>
-                      {user.name}: {user.value}
+                      {user.name} in:{user.value}
                     </Text>
                   ))}
                 </Accordion.Panel>
