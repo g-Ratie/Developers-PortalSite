@@ -20,8 +20,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     },
   });
   alldata.forEach((data) => {
-    //date型から日時を取得し、文字列に変換
-    const in_day = data.check_in.toLocaleDateString();
+    const day_of_week = ['日', '月', '火', '水', '木', '金', '土'];
+    //曜日を取得
+    const in_day_day_of_week = day_of_week[data.check_in.getDay()];
+
+    //date型から日時を取得し、文字列に変換して、曜日を追加
+    const in_day = `${data.check_in.toLocaleDateString()}(${in_day_day_of_week})`;
     if (result.some((data) => data.day === in_day)) {
       const index = result.findIndex((data) => data.day === in_day);
       result[index].value += 1;
