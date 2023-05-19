@@ -7,8 +7,8 @@ const Statspage = () => {
       <HeaderSimple
         links={[
           { link: '/', label: 'Home' },
-          { link: '/stats', label: 'Stats' },
-          { link: '/user', label: 'Users' },
+          { link: '/stats', label: '統計データ' },
+          { link: '/user', label: 'ユーザー' },
         ]}
       />
       <ChartTabs />

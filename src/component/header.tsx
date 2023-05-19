@@ -1,8 +1,22 @@
-import { Burger, Container, Drawer, Group, Header, createStyles, rem } from '@mantine/core';
+import {
+  Avatar,
+  Burger,
+  Button,
+  Container,
+  Drawer,
+  Group,
+  Header,
+  Text,
+  createStyles,
+  rem,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { IconChevronDown } from '@tabler/icons-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { userFirebaseAuthContext } from '../auth/Provider';
+import Loginbutton from './loginbutton';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -17,7 +31,6 @@ const useStyles = createStyles((theme) => ({
       display: 'none',
     },
   },
-
   burger: {
     [theme.fn.largerThan('xs')]: {
       display: 'none',
@@ -76,6 +89,9 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
   const [opened, { toggle }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
+  const auth = userFirebaseAuthContext();
+
+  //providerからの
 
   const items = links.map((link) => (
     <Link
@@ -95,9 +111,6 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
       key={link.label}
       href={link.link}
       className={cx(classes.burgerlink, { [classes.burgerlinkActive]: active === link.link })}
-      onClick={(event) => {
-        setActive(link.link);
-      }}
     >
       {link.label}
     </a>
@@ -107,19 +120,33 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
     <>
       <Header height={60} mb={120}>
         <Container className={classes.header}>
-          <Image src="/logo.png" alt="logo" width={192} height={108} />
-          <Group spacing={5} className={classes.links}>
-            {items}
-          </Group>
+          <Link href="/">
+            <Image src="/logo.png" alt="logo" width={192} height={108} />
+          </Link>
 
           <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
+          {auth.currentUser ? (
+            <Button variant="outline">
+              <Avatar
+                src={auth.currentUser.photoURL}
+                radius="xl"
+                size={rem(24)}
+                style={{ marginRight: '10px' }}
+              />
+              <Text>{auth.currentUser.displayName}</Text>
+              <IconChevronDown size={rem(12)} stroke={1.5} />
+            </Button>
+          ) : (
+            <Loginbutton />
+          )}
+        </Container>
+        <Container className={classes.header}>
+          <Group className={classes.links}>{items}</Group>
         </Container>
       </Header>
 
       <Drawer opened={opened} onClose={toggle} padding="md" position="right" size="100%">
-        <Container style={{ marginTop: '20%' }}>
-          {burgeritems}
-        </Container>
+        <Container style={{ marginTop: '20%' }}>{burgeritems}</Container>
       </Drawer>
     </>
   );
