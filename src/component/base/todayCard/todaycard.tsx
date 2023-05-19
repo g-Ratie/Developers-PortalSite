@@ -51,7 +51,7 @@ export function TodayCard() {
   }, []);
 
   return (
-    <Skeleton visible={loading} className={classes.card} style={{ marginTop: 20 }}>
+    <Skeleton visible={loading} className={classes.card}>
       <Card padding="md" radius="md" withBorder shadow="sm" style={{ marginLeft: 0 }}>
         <Card.Section>
           <Title order={3} align="left" mt="lg" mb="sm" style={{ marginLeft: 15 }}>
