@@ -2,6 +2,7 @@ import { Burger, Container, Drawer, Group, Header, createStyles, rem } from '@ma
 import { useDisclosure } from '@mantine/hooks';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 const useStyles = createStyles((theme) => ({
@@ -67,14 +68,14 @@ const useStyles = createStyles((theme) => ({
     },
   },
 }));
-
 interface HeaderSimpleProps {
   links: { link: string; label: string }[];
 }
 
 export function HeaderSimple({ links }: HeaderSimpleProps) {
+  const router = useRouter();
   const [opened, { toggle }] = useDisclosure(false);
-  const [active, setActive] = useState(links[0].link);
+  const [active, setActive] = useState(router.pathname);
   const { classes, cx } = useStyles();
 
   const items = links.map((link) => (
@@ -83,8 +84,9 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
       href={link.link}
       className={cx(classes.link, { [classes.linkActive]: active === link.link })}
       onClick={(event) => {
+        event.preventDefault();
         setActive(link.link);
-        //ここに遷移の処理を書く
+        router.push(link.link);
       }}
     >
       {link.label}
@@ -107,7 +109,9 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
     <>
       <Header height={60} mb={120}>
         <Container className={classes.header}>
-          <Image src="/logo.png" alt="logo" width={192} height={108} />
+          <Link href="/">
+            <Image src="/logo.png" alt="logo" width={192} height={108} />
+          </Link>
           <Group spacing={5} className={classes.links}>
             {items}
           </Group>
@@ -117,9 +121,7 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
       </Header>
 
       <Drawer opened={opened} onClose={toggle} padding="md" position="right" size="100%">
-        <Container style={{ marginTop: '20%' }}>
-          {burgeritems}
-        </Container>
+        <Container style={{ marginTop: '20%' }}>{burgeritems}</Container>
       </Drawer>
     </>
   );
