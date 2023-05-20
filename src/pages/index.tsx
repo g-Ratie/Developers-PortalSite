@@ -1,6 +1,6 @@
 import { Center } from '@mantine/core';
+import { HeaderSimple } from '../component/base/template/header/header';
 import { TodayCard } from '../component/base/todayCard/todaycard';
-import { HeaderSimple } from '../component/header';
 
 const Demopage = () => {
   return (

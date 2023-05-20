@@ -1,4 +1,4 @@
-import { Burger, Container, Drawer, Header, createStyles, rem } from '@mantine/core';
+import { Container, Header, createStyles, rem } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -117,13 +117,8 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
             <Image src="/logo.png" alt="logo" width={192} height={108} />
           </Link>
           {session ? <UserMenu /> : <LoginButton />}
-          <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
         </Container>
       </Header>
-
-      <Drawer opened={opened} onClose={toggle} padding="md" position="right" size="100%">
-        <Container style={{ marginTop: '20%' }}>{burgeritems}</Container>
-      </Drawer>
     </>
   );
 }

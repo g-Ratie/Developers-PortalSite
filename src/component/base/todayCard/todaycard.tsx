@@ -36,12 +36,13 @@ export function TodayCard() {
   const { classes } = useStyles();
 
   useEffect(() => {
+    setLoading(true);
     fetch('/api/nowuser')
       .then((response) => response.json())
       .then((data) => {
         setUserInfo(data);
-        setLoading(false);
         console.log(data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -52,7 +53,7 @@ export function TodayCard() {
 
   return (
     <Skeleton visible={loading} className={classes.card}>
-      <Card padding="md" radius="md" withBorder shadow="sm" style={{ marginLeft: 0 }}>
+      <Card padding="md" radius="md" withBorder shadow="sm" style={{ marginTop: 20 }}>
         <Card.Section>
           <Title order={3} align="left" mt="lg" mb="sm" style={{ marginLeft: 15 }}>
             オフィスステータス
@@ -61,7 +62,7 @@ export function TodayCard() {
 
         <Group position="apart" mt="md" mb="xs">
           <Text weight={500}>
-            現在のオフィス利用者
+            4Fオフィス
             <Badge
               color="blue"
               variant="gradient"

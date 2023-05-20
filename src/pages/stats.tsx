@@ -1,5 +1,5 @@
 import ChartTabs from '../component/base/chartTabs/Tabs';
-import { HeaderSimple } from '../component/header';
+import { HeaderSimple } from '../component/base/template/header/header';
 
 const Statspage = () => {
   return (
