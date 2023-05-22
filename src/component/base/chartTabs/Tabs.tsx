@@ -1,6 +1,6 @@
 import { Container, Tabs } from '@mantine/core';
 import { IconCrown, IconGraph, IconSettings } from '@tabler/icons-react';
-import MonthlyChart from '../MonthlyEntrydataChart/chart';
+import MonthlyChart from '../EntrycountChart/chart';
 import RankingChart from '../timeRankingChart/chart';
 
 const ChartTabs = () => {
