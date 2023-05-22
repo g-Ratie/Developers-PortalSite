@@ -5,7 +5,7 @@ import {
   Card,
   Divider,
   Group,
-  Skeleton,
+  LoadingOverlay,
   Text,
   Title,
 } from '@mantine/core';
@@ -52,56 +52,56 @@ export function TodayCard() {
   }, []);
 
   return (
-    <Skeleton visible={loading} className={classes.card}>
-      <Card padding="md" radius="md" withBorder shadow="sm" style={{ marginTop: 20 }}>
-        <Card.Section>
-          <Title order={3} align="left" mt="lg" mb="sm" style={{ marginLeft: 15 }}>
-            オフィスステータス
-          </Title>
-        </Card.Section>
+    <Card padding="md" radius="md" withBorder shadow="sm" className={classes.card}>
+      <LoadingOverlay visible={loading} />
 
-        <Group position="apart" mt="md" mb="xs">
-          <Text weight={500}>
-            4Fオフィス
-            <Badge
-              color="blue"
-              variant="gradient"
-              gradient={{ from: 'indigo', to: 'cyan' }}
-              size="md"
-              style={{ marginLeft: 10 }}
-            >
-              {/* 値を取得する */}
-              {userinfo.length}/15
-            </Badge>
-            {userinfo.map((user, index) => (
-              <Text key={index} weight={500}>
-                {user.name}
-              </Text>
-            ))}
-            <Accordion defaultValue="usertime">
-              <Accordion.Item value="usertime">
-                <Accordion.Control>詳細データ</Accordion.Control>
-                <Accordion.Panel>
-                  {userinfo.map((user, index) => (
-                    <Text key={index} weight={500}>
-                      {user.name} in:{user.value}
-                    </Text>
-                  ))}
-                </Accordion.Panel>
-              </Accordion.Item>
-            </Accordion>
-          </Text>
-        </Group>
-        <Divider />
+      <Card.Section>
+        <Title order={3} align="left" mt="lg" mb="sm" style={{ marginLeft: 15 }}>
+          オフィスステータス
+        </Title>
+      </Card.Section>
 
-        <Text size="sm" color="dimmed">
-          データ取得時間: {currentTime}
+      <Group position="apart" mt="md" mb="xs">
+        <Text weight={500}>
+          4Fオフィス
+          <Badge
+            color="blue"
+            variant="gradient"
+            gradient={{ from: 'indigo', to: 'cyan' }}
+            size="md"
+            style={{ marginLeft: 10 }}
+          >
+            {/* 値を取得する */}
+            {userinfo.length}/15
+          </Badge>
+          {userinfo.map((user, index) => (
+            <Text key={index} weight={500}>
+              {user.name}
+            </Text>
+          ))}
+          <Accordion defaultValue="usertime">
+            <Accordion.Item value="usertime">
+              <Accordion.Control>詳細データ</Accordion.Control>
+              <Accordion.Panel>
+                {userinfo.map((user, index) => (
+                  <Text key={index} weight={500}>
+                    {user.name} in:{user.value}
+                  </Text>
+                ))}
+              </Accordion.Panel>
+            </Accordion.Item>
+          </Accordion>
         </Text>
+      </Group>
+      <Divider />
 
-        <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-          詳細を見る
-        </Button>
-      </Card>
-    </Skeleton>
+      <Text size="sm" color="dimmed">
+        データ取得時間: {currentTime}
+      </Text>
+
+      <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+        詳細を見る
+      </Button>
+    </Card>
   );
 }
