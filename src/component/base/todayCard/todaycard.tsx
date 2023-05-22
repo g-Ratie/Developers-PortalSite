@@ -37,7 +37,7 @@ export function TodayCard() {
 
   useEffect(() => {
     setLoading(true);
-    fetch('/api/nowuser')
+    fetch('/api/users/getnowuser')
       .then((response) => response.json())
       .then((data) => {
         setUserInfo(data);
