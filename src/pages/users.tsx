@@ -1,5 +1,5 @@
-import ChartTabs from '../component/base/chartTabs/Tabs';
 import { HeaderSimple } from '../component/base/header/header';
+import Userscard from '../component/base/userscard';
 
 const Statspage = () => {
   return (
@@ -11,7 +11,7 @@ const Statspage = () => {
           { link: '/user', label: 'Users' },
         ]}
       />
-      <ChartTabs />
+      <Userscard />
     </>
   );
 };

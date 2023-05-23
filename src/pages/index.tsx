@@ -1,22 +1,7 @@
-import { Center } from '@mantine/core';
-import { HeaderSimple } from '../component/base/template/header/header';
-import { TodayCard } from '../component/base/todayCard/todaycard';
+import IndexPage from '../component/template';
 
-const Demopage = () => {
-  return (
-    <>
-      <HeaderSimple
-        links={[
-          { link: '/', label: 'Home' },
-          { link: '/stats', label: 'Stats' },
-          { link: '/user', label: 'Users' },
-        ]}
-      />
-      <Center>
-        <TodayCard />
-      </Center>
-    </>
-  );
+const Index = () => {
+  return <IndexPage />;
 };
 
-export default Demopage;
+export default Index;
