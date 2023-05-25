@@ -63,7 +63,7 @@ export function OfficeAccessCard() {
             <Badge color="red" variant="light" size="md" style={{ marginRight: 15 }}>
               未入室
             </Badge>
-          )}a
+          )}
         </Group>
       </Card.Section>
       {(userinfo.some((item) => item.discord_id === session?.user?.name) && (
