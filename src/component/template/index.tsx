@@ -1,4 +1,4 @@
-import { Center } from '@mantine/core';
+import { OfficeAccessCard } from '../base/OfficeAccessCard/officeaccescard';
 import { HeaderSimple } from '../base/header/header';
 import { TodayCard } from '../base/todayCard/todaycard';
 
@@ -12,9 +12,8 @@ const IndexPage = () => {
           { link: '/user', label: 'Users' },
         ]}
       />
-      <Center>
-        <TodayCard />
-      </Center>
+      <OfficeAccessCard />
+      <TodayCard />
     </>
   );
 };
