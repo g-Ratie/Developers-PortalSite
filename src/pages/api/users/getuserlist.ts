@@ -16,25 +16,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     );
     const latestRecord = sortedRecords[0];
     const total = sortedRecords.reduce((sum, record) => {
-      const outTime = record.check_out || nowTime;
+      const outTime = record.check_out?.getTime() || nowTime;
       const timeDiff = Math.round((outTime - record.check_in.getTime()) / (1000 * 60 * 60));
       return sum + timeDiff;
     }, 0);
-
+    const str_user_discord_id = user.user_discord_id.toString();
     return {
-      user: user.user_name,
-      value: latestRecord ? latestRecord.check_in : null,
+      name: user.user_name,
+      latestRecord: latestRecord ? latestRecord.check_in : null,
+      discord_id: str_user_discord_id,
       total,
     };
   });
 
   result.sort((a, b) => {
-    if (a.value === null) {
+    if (a.latestRecord === null) {
       return 1;
-    } else if (b.value === null) {
+    } else if (b.latestRecord === null) {
       return -1;
     } else {
-      return b.value.getTime() - a.value.getTime();
+      return b.latestRecord.getTime() - a.latestRecord.getTime();
     }
   });
 

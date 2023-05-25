@@ -12,10 +12,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     },
   });
   const users = alldata.map((data) => data.users.user_name);
+  const discord_id = alldata.map((data) => data.users.user_discord_id?.toString());
   const in_times = alldata.map((data) => data.check_in.toLocaleString());
   const result = users.map((user, index) => {
     return {
       name: user,
+      id: discord_id[index],
       value: in_times[index],
     };
   });
