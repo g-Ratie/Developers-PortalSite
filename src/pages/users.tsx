@@ -1,5 +1,5 @@
 import { HeaderSimple } from '../component/base/header/header';
-import Userscard from '../component/base/userscard';
+import Userscard from '../component/base/usersCard/userscard';
 
 const Statspage = () => {
   return (
