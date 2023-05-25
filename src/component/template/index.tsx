@@ -1,6 +1,6 @@
-import { OfficeAccessCard } from '../base/OfficeAccessCard/officeaccescard';
+import { OfficeAccessCard } from '../base/OfficeAccessCard/officeaccesscard';
 import { HeaderSimple } from '../base/header/header';
-import { TodayCard } from '../base/todayCard/todaycard';
+import { OfficeStatusCard } from '../base/officeStatusCard/officestatuscard';
 
 const IndexPage = () => {
   return (
@@ -13,7 +13,7 @@ const IndexPage = () => {
         ]}
       />
       <OfficeAccessCard />
-      <TodayCard />
+      <OfficeStatusCard />
     </>
   );
 };

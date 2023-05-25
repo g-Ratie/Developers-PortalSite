@@ -29,7 +29,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function TodayCard() {
+export function OfficeStatusCard() {
   const [userinfo, setUserInfo] = useState<DataObject[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentTime, setCurrentTime] = useState('');
@@ -41,7 +41,6 @@ export function TodayCard() {
       .then((response) => response.json())
       .then((data) => {
         setUserInfo(data);
-        console.log(data);
         setLoading(false);
       })
       .catch((error) => {
@@ -61,7 +60,7 @@ export function TodayCard() {
         </Title>
       </Card.Section>
 
-      <Group position="apart" mt="md" mb="xs">
+      <Group position="apart" mt="md" mb="md" style={{ marginLeft: 20, marginRight: 15 }}>
         <Text weight={500}>
           4Fオフィス
           <Badge
