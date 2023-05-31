@@ -12,6 +12,7 @@ model daily_records {
   user_id   Int
   check_in  DateTime  @db.Timestamp(6)
   check_out DateTime? @db.Timestamp(6)
+  is_4f     Boolean
   users     users     @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
 }
 
