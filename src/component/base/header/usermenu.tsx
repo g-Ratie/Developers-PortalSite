@@ -29,6 +29,7 @@ const UserMenu = () => {
         <Menu.Item icon={<IconAddressBook size={14} />}>プロフィール(未実装)</Menu.Item>
         <Menu.Item
           icon={<IconGraph size={14} />}
+          disabled
           onClick={() => {
             router.push('/stats');
           }}
@@ -37,6 +38,7 @@ const UserMenu = () => {
         </Menu.Item>
         <Menu.Item
           icon={<IconUsers size={14} />}
+          disabled
           onClick={() => {
             router.push('/users');
           }}

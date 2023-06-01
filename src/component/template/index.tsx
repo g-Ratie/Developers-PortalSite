@@ -1,6 +1,5 @@
-import { OfficeAccessCard } from '../base/OfficeAccessCard/officeaccesscard';
 import { HeaderSimple } from '../base/header/header';
-import { OfficeStatusCard } from '../base/officeStatusCard/officestatuscard';
+import { LoginStatusCard } from '../base/loginStatusCard/loginstatuscard';
 
 const IndexPage = () => {
   return (
@@ -12,8 +11,7 @@ const IndexPage = () => {
           { link: '/user', label: 'Users' },
         ]}
       />
-      <OfficeAccessCard />
-      <OfficeStatusCard />
+      <LoginStatusCard />
     </>
   );
 };

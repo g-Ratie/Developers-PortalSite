@@ -1,14 +1,4 @@
-import {
-  Accordion,
-  Badge,
-  Button,
-  Card,
-  Divider,
-  Group,
-  LoadingOverlay,
-  Text,
-  Title,
-} from '@mantine/core';
+import { Card, Divider, Group, LoadingOverlay, Text, Title } from '@mantine/core';
 import { createStyles } from '@mantine/styles';
 import { useEffect, useState } from 'react';
 interface DataObject {
@@ -29,7 +19,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function OfficeStatusCard() {
+export function LoginStatusCard() {
   const [userinfo, setUserInfo] = useState<DataObject[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentTime, setCurrentTime] = useState('');
@@ -56,51 +46,18 @@ export function OfficeStatusCard() {
 
       <Card.Section>
         <Title order={3} align="left" mt="lg" mb="sm" style={{ marginLeft: 15 }}>
-          オフィスステータス
+          ログインステータス
         </Title>
       </Card.Section>
 
       <Group position="apart" mt="md" mb="md" style={{ marginLeft: 20, marginRight: 15 }}>
-        <Text weight={500}>
-          4Fオフィス
-          <Badge
-            color="blue"
-            variant="gradient"
-            gradient={{ from: 'indigo', to: 'cyan' }}
-            size="md"
-            style={{ marginLeft: 10 }}
-          >
-            {/* 値を取得する */}
-            {userinfo.length}/15
-          </Badge>
-          {userinfo.map((user, index) => (
-            <Text key={index} weight={500}>
-              {user.name}
-            </Text>
-          ))}
-          <Accordion defaultValue="usertime">
-            <Accordion.Item value="usertime">
-              <Accordion.Control>詳細データ</Accordion.Control>
-              <Accordion.Panel>
-                {userinfo.map((user, index) => (
-                  <Text key={index} weight={500}>
-                    {user.name} in:{user.value}
-                  </Text>
-                ))}
-              </Accordion.Panel>
-            </Accordion.Item>
-          </Accordion>
-        </Text>
+        <Text weight={500}>ログインに成功しました</Text>
       </Group>
       <Divider />
 
       <Text size="sm" color="dimmed">
         データ取得時間: {currentTime}
       </Text>
-
-      <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-        詳細を見る
-      </Button>
     </Card>
   );
 }
