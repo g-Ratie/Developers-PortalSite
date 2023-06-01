@@ -1,13 +1,7 @@
-import { HeaderSimple } from '../component/base/header/header';
-import Userscard from '../component/base/usersCard/userscard';
+import Users from '../component/template/users';
 
-const Statspage = () => {
-  return (
-    <>
-      <HeaderSimple />
-      <Userscard />
-    </>
-  );
+const Userspage = () => {
+  return <Users />;
 };
 
-export default Statspage;
+export default Userspage;
