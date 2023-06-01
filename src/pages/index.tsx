@@ -1,4 +1,4 @@
-import IndexPage from '../component/template';
+import IndexPage from '../component/template/index';
 
 const Index = () => {
   return <IndexPage />;

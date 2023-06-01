@@ -77,7 +77,7 @@ export function HeaderSimple() {
     <>
       <Header height={60}>
         <Container className={classes.header}>
-          <Link href="/">
+          <Link href="/status">
             <Image src="/logo.png" alt="logo" width={192} height={108} />
           </Link>
           {session ? <UserMenu /> : <LoginButton />}
