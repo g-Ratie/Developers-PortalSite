@@ -1,34 +1,30 @@
-import { Button, Checkbox, Modal, SegmentedControl, Text } from '@mantine/core';
+import { Button, Checkbox, Modal } from '@mantine/core';
 import { DateTimePicker } from '@mantine/dates';
 import { useDisclosure, useInputState } from '@mantine/hooks';
 import { useSession } from 'next-auth/react';
 
-const Checkinform = () => {
+const Checkoutform = () => {
   const { data: session } = useSession();
   const [opened, { open, close }] = useDisclosure(false);
   const [datetimeCheckboxValue, setDatetimeCheckboxValue] = useInputState(false);
   const [datetimeValue, setDatetimeValue] = useInputState(new Date());
-  const [floor, setFloor] = useInputState('4F');
 
   const handleButtonClick = async () => {
     const userDiscordId = session?.user?.id; // Discord ID を設定
-    const checkInTime = datetimeValue;
-    const is4F = true; // 4Fにいるかどうかを設定
-    const response = await fetch('/api/checkin', {
+    const checkOutTime = datetimeValue;
+    const response = await fetch('/api/checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         userDiscordId,
-        checkInTime,
-        is4F,
+        checkOutTime,
       }),
     });
     console.log(response.body);
     close();
     window.location.reload();
-
     if (response.ok) {
       console.log('Record added successfully');
     } else {
@@ -38,11 +34,9 @@ const Checkinform = () => {
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title="オフィス入室" fullScreen>
-        <Text> 階数選択</Text>
-        <SegmentedControl fullWidth data={['4F', '2F']} value={floor} onChange={setFloor} />
+      <Modal opened={opened} onClose={close} title="オフィス退出" fullScreen>
         <p>Discord名:{session?.user?.name}</p>
-        <Checkbox label="入室時刻を手動で入力する" onChange={setDatetimeCheckboxValue} />
+        <Checkbox label="退出時刻を手動で入力する" onChange={setDatetimeCheckboxValue} />
         <DateTimePicker
           label="時刻を入力してください"
           valueFormat="YYYY-MM-DD HH:mm"
@@ -61,10 +55,10 @@ const Checkinform = () => {
       </Modal>
 
       <Button fullWidth onClick={open}>
-        入室
+        退出
       </Button>
     </>
   );
 };
 
-export default Checkinform;
+export default Checkoutform;
