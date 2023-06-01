@@ -1,3 +1,4 @@
+import { LoadingOverlay } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from 'recharts';
 
@@ -24,6 +25,8 @@ const RankingChart = () => {
 
   return (
     <BarChart width={1000} height={500} data={rankingData}>
+      <LoadingOverlay visible={loading} />
+
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" angle={-45} textAnchor="end" interval={0} height={100} />
       <YAxis />

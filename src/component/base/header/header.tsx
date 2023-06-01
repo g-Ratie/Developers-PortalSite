@@ -1,10 +1,7 @@
 import { Container, Header, createStyles, rem } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
 import LoginButton from './loginbutton';
 import UserMenu from './usermenu';
 
@@ -71,43 +68,10 @@ const useStyles = createStyles((theme) => ({
     },
   },
 }));
-interface HeaderSimpleProps {
-  links: { link: string; label: string }[];
-}
 
-export function HeaderSimple({ links }: HeaderSimpleProps) {
-  const router = useRouter();
-  const [opened, { toggle }] = useDisclosure(false);
-  const [active, setActive] = useState(router.pathname);
-  const { classes, cx } = useStyles();
+export function HeaderSimple() {
+  const { classes } = useStyles();
   const { data: session } = useSession();
-
-  const items = links.map((link) => (
-    <Link
-      key={link.label}
-      href={link.link}
-      className={cx(classes.link, { [classes.linkActive]: active === link.link })}
-      onClick={(event) => {
-        event.preventDefault();
-        setActive(link.link);
-        router.push(link.link);
-      }}
-    >
-      {link.label}
-    </Link>
-  ));
-  const burgeritems = links.map((link) => (
-    <a
-      key={link.label}
-      href={link.link}
-      className={cx(classes.burgerlink, { [classes.burgerlinkActive]: active === link.link })}
-      onClick={(event) => {
-        setActive(link.link);
-      }}
-    >
-      {link.label}
-    </a>
-  ));
 
   return (
     <>

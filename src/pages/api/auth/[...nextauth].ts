@@ -55,7 +55,7 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
-    signIn: async ({ account, user, profile }) => {
+    signIn: async ({ account }) => {
       if (account === null || account.access_token === undefined) return false;
       return await isJoinGuild(account.access_token);
     },

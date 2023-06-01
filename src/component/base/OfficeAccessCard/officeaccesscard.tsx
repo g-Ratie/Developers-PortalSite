@@ -28,6 +28,7 @@ export function OfficeAccessCard() {
   const [userinfo, setUserInfo] = useState<DataObject[]>([]);
   const [loading, setLoading] = useState(true);
   const { data: session } = useSession();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentTime, setCurrentTime] = useState('');
   const { classes } = useStyles();
 

@@ -22,7 +22,9 @@ const Errorcard = () => {
           認証エラー
         </Title>
       </Card.Section>
-      <p>あなたのDIscordアカウントのINIAD Developers Discordサーバーへの所属を確認できませんでした。</p>
+      <p>
+        あなたのDIscordアカウントのINIAD Developers Discordサーバーへの所属を確認できませんでした。
+      </p>
     </Card>
   );
 };
