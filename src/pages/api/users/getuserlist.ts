@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const timeDiff = Math.round((outTime - record.check_in.getTime()) / (1000 * 60 * 60));
       return sum + timeDiff;
     }, 0);
-    const str_user_discord_id = user.user_discord_id.toString();
+    const str_user_discord_id = user.user_discord_id?.toString();
     return {
       name: user.user_name,
       latestRecord: latestRecord ? latestRecord.check_in : null,
