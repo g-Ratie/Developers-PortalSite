@@ -47,6 +47,7 @@ export function OfficeStatusCard() {
         console.error('Error:', error);
         setLoading(false);
       });
+    setCurrentTime(new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' }));
   };
   useEffect(() => {
     getNowUser();
