@@ -86,7 +86,6 @@ export function HeroContent() {
           className={classes.control}
           onClick={() => {
             signIn('discord');
-            router.push('/status');
           }}
         >
           ログイン

@@ -42,7 +42,6 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
-
     /**
      * jwtにaccessTokenと、profile.idを追加
      */
@@ -59,11 +58,13 @@ export const authOptions: NextAuthOptions = {
       if (account === null || account.access_token === undefined) return false;
       return await isJoinGuild(account.access_token);
     },
+    // ログイン後のリダイレクト先
+    redirect: async ({ baseUrl }) => {
+      return `${baseUrl}/status`;
+    },
   },
   pages: {
     error: '/autherror',
-    signIn: '/',
-    signOut: '/',
   },
 };
 
