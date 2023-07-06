@@ -1,9 +1,9 @@
 import { Badge, Card, Group, LoadingOverlay, Title } from '@mantine/core';
 import { createStyles } from '@mantine/styles';
+import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import Checkinform from './checkinForm/checkinform';
-
-import { useSession } from 'next-auth/react';
+import Checkoutform from './checkoutForm/checkoutform';
 
 interface DataObject {
   name: string;
@@ -38,6 +38,7 @@ export function OfficeAccessCard() {
       .then((response) => response.json())
       .then((data) => {
         setUserInfo(data);
+        console.log(data);
         setLoading(false);
       })
       .catch((error) => {
@@ -56,7 +57,7 @@ export function OfficeAccessCard() {
           <Title order={3} align="left" mt="lg" mb="sm" style={{ marginLeft: 15 }}>
             オフィス入退室
           </Title>
-          {(userinfo.some((item) => item.discord_id === session?.user?.name) && (
+          {(userinfo.some((item) => item.discord_id === session?.user?.id) && (
             <Badge color="green" variant="light" size="md" style={{ marginRight: 15 }}>
               入室中
             </Badge>
@@ -67,9 +68,7 @@ export function OfficeAccessCard() {
           )}
         </Group>
       </Card.Section>
-      {(userinfo.some((item) => item.discord_id === session?.user?.name) && (
-        <p>あなたは現在オフィスにいます。</p>
-      )) || (
+      {(userinfo.some((item) => item.discord_id === session?.user?.id) && <Checkoutform />) || (
         <>
           <Checkinform />
         </>

@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const result = users.map((user, index) => {
     return {
       name: user,
-      id: discord_id[index],
+      discord_id: discord_id[index],
       value: in_times[index],
     };
   });

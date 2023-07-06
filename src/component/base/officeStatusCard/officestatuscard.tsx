@@ -1,5 +1,5 @@
 import {
-  Accordion,
+  ActionIcon,
   Badge,
   Button,
   Card,
@@ -10,6 +10,7 @@ import {
   Title,
 } from '@mantine/core';
 import { createStyles } from '@mantine/styles';
+import { IconReload } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 interface DataObject {
   name: string;
@@ -34,8 +35,7 @@ export function OfficeStatusCard() {
   const [loading, setLoading] = useState(true);
   const [currentTime, setCurrentTime] = useState('');
   const { classes } = useStyles();
-
-  useEffect(() => {
+  const getNowUser = () => {
     setLoading(true);
     fetch('/api/users/getnowuser')
       .then((response) => response.json())
@@ -48,6 +48,10 @@ export function OfficeStatusCard() {
         setLoading(false);
       });
     setCurrentTime(new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' }));
+  };
+  useEffect(() => {
+    getNowUser();
+    setCurrentTime(new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' }));
   }, []);
 
   return (
@@ -55,13 +59,18 @@ export function OfficeStatusCard() {
       <LoadingOverlay visible={loading} />
 
       <Card.Section>
-        <Title order={3} align="left" mt="lg" mb="sm" style={{ marginLeft: 15 }}>
-          オフィスステータス
-        </Title>
+        <Group position="apart">
+          <Title order={3} align="left" mt="lg" mb="sm" style={{ marginLeft: 15 }}>
+            オフィスステータス
+          </Title>
+          <ActionIcon color="blue" onClick={() => getNowUser()} style={{ marginRight: 15 }}>
+            <IconReload />
+          </ActionIcon>
+        </Group>
       </Card.Section>
 
       <Group position="apart" mt="md" mb="md" style={{ marginLeft: 20, marginRight: 15 }}>
-        <Text weight={500}>
+        <Text weight={500} style={{ margin: 2 }}>
           4Fオフィス
           <Badge
             color="blue"
@@ -70,26 +79,18 @@ export function OfficeStatusCard() {
             size="md"
             style={{ marginLeft: 10 }}
           >
-            {/* 値を取得する */}
             {userinfo.length}/15
           </Badge>
           {userinfo.map((user, index) => (
-            <Text key={index} weight={500}>
-              {user.name}
-            </Text>
+            <>
+              <Group position="apart" style={{ margin: 2 }}>
+                <Text key={index} weight={500}>
+                  {user.name}
+                </Text>
+                <Badge>{user.value}</Badge>
+              </Group>
+            </>
           ))}
-          <Accordion defaultValue="usertime">
-            <Accordion.Item value="usertime">
-              <Accordion.Control>詳細データ</Accordion.Control>
-              <Accordion.Panel>
-                {userinfo.map((user, index) => (
-                  <Text key={index} weight={500}>
-                    {user.name} in:{user.value}
-                  </Text>
-                ))}
-              </Accordion.Panel>
-            </Accordion.Item>
-          </Accordion>
         </Text>
       </Group>
       <Divider />
