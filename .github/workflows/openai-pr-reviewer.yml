@@ -19,7 +19,7 @@ jobs:
   review:
     runs-on: ubuntu-latest
     steps:
-      - uses: g-Ratie/openai-pr-reviewer@latest
+      - uses: g-Ratie/openai-pr-reviewer@v0.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
